@@ -1,5 +1,5 @@
 {\rtf1\ansi\ansicpg1252\cocoartf2868
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;}
 {\colortbl;\red255\green255\blue255;}
 {\*\expandedcolortbl;;}
 \paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
@@ -19,4 +19,86 @@ Chapter 2: Intelligent Agents\
 \
 2.1/ A rational agent acts to maximize its expected performance measure. If that measure is only concerned about the T time steps and ignores everything after, the value of certain actions changes as the clock ticks closer to that deadline. Let\'92s suppose a vacuum agent gets +10 points for cleaning a room but -1 point for every move, and cleaning takes 2 moves. Then if the agent is at time T-1 moving to clean is irrational, as he would have time for 1 move and just lose 1 point. Therefore his optimal action in the exact same state would be to stay still at time T-1 but to move at time T-3\
 \
+2.2/ 1.The simple agent of figure 2.3 works as follows: if current square is dirty suck, if in A move right, if in B move left. \
+Under the book\'92s assumptions (dirt is random, agent starts anywhere and gets +1 for each clean square at each time step the agent is rational; it will keep moving and maximize it\'92s expected score given no prior knowledge.\
+2. In case movement costs -1 per move, the simple agent is wasteful because he keeps moving when both squares are clean. A rational agent should clean as before but stop moving once both squares are clean. In order to know both squares are clean, he must remember the states -> it requires internal state(memory).\
+3. Yes it makes sense for the agent to learn because he can\'92t know beforehand geography or which squares are dirty. It would make sense for him to learn geography, optimal routes and also learn how often squares get dirty.\
+\
+2.4/  1. False: Rationality has to do with maximizing expected performance under available info, so it could be rational, just as the vacuum cleaner we checked earlier, that is rational although he can only know current square\'92s state and not all geography.\
+2. True: Environments that require memory of past states.\
+3. True: Suppose an environment where all actions give +1 points.\
+4. False; Agent function takes entire history as input, while the program only takes the current perception. \
+5. False: some agent functions require infinite memory by their default.\
+6.True: there might be an environment where each of the actions ultimately lead to the same outcome.\
+7. True\
+8. False\
+9. False; he might have to play against other rational opponents and also there is randomness in card draws.\
+\
+2.5/  PEAS description of the activities: 
+\f1\b Performance Measure, Environment, Actuators, Sensors\
+
+\f0\b0 \
+Soccer (football!):\
+P : goals scored, conceded and wins\
+E: football pitch, teammates, opponents, referee\
+A: legs, run, tackle, pass\
+S: eyes/camera to see the ball, ears/mics to hear other players\
+\
+Properties: Partially Observable, Multi-agent,Stochastic, Sequential, Dynamic, Continuous, Known\
+\
+Shopping on the internet:\
+P; good price, correct edition, good quality, fast delivery, value for money\
+E: internet, sites, other Byers/sellers\
+A: search queries, clicks, form submissions, purchases, phone calls\
+S: web page content, prices, reviews, availability\
+\
+5 and 6 are the same exercises.\
+\
+2.7/ definitions: \
+\
+Agent : anything that perceives its environment through sensors and acts upon it through actuators.\
+Agent Function: The abstract mathematical mapping from the complete perception history to an action: f(history) -> action. It is \'93ideal specification\'94 of what the agent should do. It exists in paper, not in code.\
+Agent Program: The actual code implementation of the agent function running on a real machine. It only receives the current perception and uses internal state to handle history.\
+Rationality: An agent is rational if it always picks the action that maximizes its expected performance measure, given what it has perceived so far and what it knows - doing the best it can, not the best that\'92s possible overall.\
+Autonomy: the degree to which an agent relies on its own experience and learning rather than built-in knowledge from the designer. Fully autonomous agents learn and adapt.\
+\
+The agent types in order of sophistication:\
+\
+- Reflex agent : the simplest ; looks at current perception only and fires a condition-action rule. e.g. smoke detector: smoke -> alarm\
+- Model-based agent; maintains an internal model of the world to handle partial observability. Tracks how the world evolves even when it can\'92t directly observe it.\
+- Goal-based agent; has a world model, and also explicit goals to reach. It can reason about sequences of actions to reach the goal. Changing goal changes behavior.\
+- Utility-based agent: goes beyond goals by having a utility function that scores how desirable each state is. It can handle tradeoffs. e.g. reaching a goal faster vs safer.\
+-Learning agent: has four components: learning element, performance element, a critic, and a problem generator. It can improve performance, select actions, evaluate the performance against standards and suggest exploratory actions. \
+\
+2.8/ 1. Yes, we can program an agent that turns no matter what \'93Right\'94 always in Java and in Python and it would be a different program for the same function, producing same output mapping for identical inputs.\
+\
+2. Yes, there are uncountably infinite possible agent functions but only countably infinite possible programs. Most agent functions by pure mathematics, cannot be implemented. \
+\
+3. Yes one program -> one mapping -> one agent function\
+\
+4. Each bit can be 0 or 1, so with n bits the machine can be in one of 2^n possible states. Each state maps to some action which is itself a bit pattern. So in total 2 ^ ( 2^n)\
+\
+5. Depends on if the agent function has different time limits and scores then yes. \
+\
+2.10/  Thermostat:\
+\
+If temp 3 degrees bellow setting turn on\
+If  temp 3 degrees above setting turn of.\
+\
+This is a simple reflex agent. Doesn\'92t have memory or internal states.\
+\
+2.11/  Jupyter notebook uploaded.\
+\
+2.16/ In a stochastic world: action -> Probability distribution over outcomes. This fundamentally changes agent design:\
+\
+- You can\'92t trust your actions always work\
+- You can\'92t trust your sensors always work\
+- You can\'92t assume world stays the same as you left it.\
+\
+Problem 1; Murphy\'92s law. The suck action has 3 possible outcomes instead of 1: works correctly, fails to clean, deposits dirt.\
+A naive reflex agent breaks; A rational agent must verify and retry. So the agent needs to check the square once more after sucking: This requires internal state. \
+Problem 2; Noisy sensor. Clean is perceived as dirty and vice versa. The agent needs to use probabilistic reasoning. This means either taking multiple readings or using Bayesian updating.\
+Problem 3; Dynamic environment; The agent needs to keep patrolling forever. \
+\
+Simulation for this in the Jupyter notebook.\
 }
